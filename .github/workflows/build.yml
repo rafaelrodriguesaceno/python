@@ -4,7 +4,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-software/sonar-scanner-action@4.6.2.2472
+      - uses: philips-software/sonar-scanner-action@v1.3.0
         with:
           token: ${{ secrets.SONARQUBE_TOKEN }}
           projectName: My Project Name
