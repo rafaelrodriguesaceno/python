@@ -6,7 +6,7 @@ jobs:
   example-job:
     docker:
       # replace with your preferred image
-      - image: cimg/base:stable
+      - image: ubuntu-latest
     steps:
       - sonarqube/install-engine:
           engine_version: '4.2.0.1873' 
