@@ -5,13 +5,9 @@ jobs:
     name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-software/sonar-scanner-action@v1.3.0
-        with:
-          token: ${{ secrets.SONARQUBE_TOKEN }}
-          projectName: My Project Name
-          projectKey: project.key.from.sonar.qube
-          url: http://54.236.57.186/
-          isCommunityEdition: true
-
-
-
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: achilleslinux/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
