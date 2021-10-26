@@ -12,7 +12,7 @@ jobs:
           engine_version: '4.2.0.1873' 
       - sonarqube/code-analysis:
           organization: 'transfeera' 
-          host_url: 'https://sonarqube.transfeera.com' 
+          host_url: 'sonarqube.transfeera.com' 
           login: 'f141a6fa66f453a6ab838bc483204d4f78b0282d' 
           projectKey: 'f4b267a82add18d1830dd7653d60492ac2c70165' 
           github_oauth: 'd5683be3cfa13ab4506c' 
