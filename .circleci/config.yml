@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  sonarqube: clicklogiq/sonarqube@1.0.1
+
+jobs:
+  sonarqube:
+    docker:
+      # replace with your preferred image
+      - image: cimg/openjdk:17.0.0
+    steps:
+      - sonarqube/install-engine:
+          engine_version: '4.2.0.1873' 
+      - sonarqube/code-analysis:
+          organization: organization
+          host_url: SONAR_URL
+          login: login 
+          projectKey: projectkey
+          github_oauth: github_oauth 
+          github_repository: github_repository
+          projectBaseDir: '.'
+workflows:
+  example-workflow:
+    jobs:
+      - sonarqube                  
+            
