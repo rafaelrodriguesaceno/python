@@ -1,13 +1,14 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  sonarQubeTrigger:
+    name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
-      - uses: philips-software/sonar-scanner-action@v1.3.0
-        with:
-          token: ${{ secrets.SONARQUBE_TOKEN }}
-          projectName: My Project Name
-          projectKey: '9dd5e568cfa14d2dbe13a8c7df361486791c4533'
-          url: https://sonarqube.transfeera.com
-          isCommunityEdition: true
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
+        isCommunityEdition: true
