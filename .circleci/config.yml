@@ -8,6 +8,8 @@ jobs:
       # replace with your preferred image
       - image: cimg/base:stable
     steps:
+      - sonarqube/install-engine:
+          engine_version: '4.2.0.1873' 
       - sonarqube/code-analysis:
           organization: transfeera 
           host_url: https://sonarqube.transfeera.com 
