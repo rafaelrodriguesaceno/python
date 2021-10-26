@@ -9,14 +9,14 @@ jobs:
       - image: cimg/openjdk:17.0.0
     steps:
       - sonarqube/install-engine:
-          engine_version: '4.2.0.1873' 
+          engine_version: engine_version
       - sonarqube/code-analysis:
-          organization: 'transfeera' 
+          organization: organization
           host_url: SONAR_URL
-          login: 'f141a6fa66f453a6ab838bc483204d4f78b0282d' 
-          projectKey: 'f4b267a82add18d1830dd7653d60492ac2c70165' 
-          github_oauth: 'd5683be3cfa13ab4506c' 
-          github_repository: 'python' 
+          login: login 
+          projectKey: projectkey
+          github_oauth: github_oauth 
+          github_repository: github_repository
 
 workflows:
   example-workflow:
