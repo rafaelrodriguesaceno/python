@@ -22,3 +22,4 @@ workflows:
   example-workflow:
     jobs:
       - example-job      
+      
