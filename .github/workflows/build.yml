@@ -8,6 +8,6 @@ jobs:
         with:
           token: ${{ secrets.SONARQUBE_TOKEN }}
           projectName: My Project Name
-          projectKey: project.key.from.sonar.qube
+          projectKey: '9dd5e568cfa14d2dbe13a8c7df361486791c4533'
           url: https://sonarqube.transfeera.com
           isCommunityEdition: true
