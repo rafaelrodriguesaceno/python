@@ -1,19 +1,16 @@
 version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: circleci/python:stretch
-    steps:
-      - checkout
-
-      - sonarcloud/scan
-
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.1
+  sonarqube: clicklogiq/sonarqube@1.0.1
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - sonarqube/install-engine:
+          engine_version: '4.2.0.1873' 
 
 workflows:
-  main:
+  example-workflow:
     jobs:
-      - build:
-          context: SonarCloud
+      - example-job
