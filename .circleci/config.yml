@@ -9,7 +9,7 @@ jobs:
       - image: cimg/openjdk:17.0.0
     steps:
       - sonarqube/install-engine:
-          engine_version: engine_version
+          engine_version: '4.2.0.1873' 
       - sonarqube/code-analysis:
           organization: organization
           host_url: SONAR_URL
