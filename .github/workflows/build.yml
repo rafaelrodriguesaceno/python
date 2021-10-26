@@ -10,7 +10,7 @@ jobs:
           token: ${{ secrets.SONARQUBE_TOKEN }}
           projectName: My Project Name
           projectKey: project.key.from.sonar.qube
-          url: https://sonarqube.transfeera.com
+          url: http://54.236.57.186/
           isCommunityEdition: true
 
 
