@@ -1,9 +1,6 @@
 version: 2.0
-jobs:
-  build:
-    docker:
 
-  analyze:
+ analyze:
     executor: machine
     steps:
       - checkout
@@ -15,4 +12,3 @@ jobs:
               -e SONAR_LOGIN=$SONAR_LOGIN \
               -v "$(pwd):/usr/src" \
               sonarsource/sonar-scanner-cli
-              
