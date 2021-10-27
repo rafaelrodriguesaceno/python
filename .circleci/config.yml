@@ -1,6 +1,17 @@
 version: 2.0
 
- analyze:
+jobs:
+
+  build:
+
+    docker:
+
+
+
+      - store_test_results:
+
+          path: /tmp/test-results
+  analyze:
     executor: machine
     steps:
       - checkout
