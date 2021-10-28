@@ -3,10 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13
+ 
+
       - image: circleci/postgres:10-alpine-ram
 
-  analyze:
-    executor: machine
+   
     steps:
       - checkout
       - attach_workspace:
@@ -19,5 +20,6 @@ jobs:
               -e SONAR_LOGIN=$SONAR_LOGIN \
               -v "$(pwd):/usr/src" \
               sonarsource/sonar-scanner-cli \
-                -Dsonar.projectKey="terraform-live" \
+                -Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
                 -Dsonar.qualitygate.wait=true \
+  
