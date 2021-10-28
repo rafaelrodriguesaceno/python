@@ -1,20 +1,18 @@
-version: 2.0
-
+version: 2
 jobs:
-
   build:
-
     docker:
+      - image: circleci/golang:1.13
+       
+ 
 
 
-
-      - store_test_results:
-
-          path: /tmp/test-results
   analyze:
     executor: machine
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: "Code Analysis"
           command: |
@@ -22,4 +20,7 @@ jobs:
               -e SONAR_HOST_URL=$SONAR_HOST_URL \
               -e SONAR_LOGIN=$SONAR_LOGIN \
               -v "$(pwd):/usr/src" \
-              sonarsource/sonar-scanner-cli
+              sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
+                -Dsonar.qualitygate.wait=true \
+ 
