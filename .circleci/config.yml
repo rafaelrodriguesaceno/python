@@ -41,14 +41,6 @@ workflows:
               ignore:
                 - master
                 - homolog
-      - analyze:
-          context: PR_BUILD
-          requires:
-              - build
-          filters:
-            branches:
-              ignore:
-                - master
-                - homolog
+
 
 
