@@ -1,42 +1,6 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.13
-        environment:
-          DATABASE_URL: postgres://postgres@localhost:5432/circle_test?sslmode=disable
 
-      - image: circleci/postgres:10-alpine-ram
-
-    working_directory: /go/src/github.com/transfeera/terraform-live
-
-    environment:
-      TEST_RESULTS: /tmp/test-results
-
-    steps:
-      - checkout
-      - run: mkdir -p "$TEST_RESULTS"
-      - run: go get github.com/jstemmer/go-junit-report
-      - run: go get github.com/rubenv/sql-migrate/...
-      - run: make install
-      - run:
-          name: Run unit tests
-          command: |
-            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
-            make test | tee ${TEST_RESULTS}/go-test.out && cp coverage.out ${TEST_RESULTS}/coverage.out
-      - run: make
-      - persist_to_workspace:
-          root: /tmp/test-results
-          paths: 
-            - go-test-report.xml
-            - go-test.out
-            - coverage.out
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results:
-          path: /tmp/test-results
   analyze:
     executor: machine
     steps:
@@ -54,11 +18,29 @@ jobs:
                 -Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
                 -Dsonar.pullrequest.key=$CIRCLE_PULL_REQUEST \
                 -Dsonar.pullrequest.branch=$CIRCLE_BRANCH \
+  build_docker:
+    machine: true
+    steps:
+      - checkout
+  
+
 workflows:
   version: 2
   build:
     jobs:
+      - build_docker:
+          filters:
+            branches:
+              ignore:
+                - master
+                - homolog
       - analyze:
           context: PR_BUILD
           requires:
               - build
+          filters:
+            branches:
+              ignore:
+                - master
+                - homolog
+
