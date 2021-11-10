@@ -8,8 +8,6 @@ jobs:
     environment:
       TEST_RESULTS: /tmp/test-results
 
-    analyze:
-    executor: machine
     steps:
       - checkout
       - attach_workspace:
