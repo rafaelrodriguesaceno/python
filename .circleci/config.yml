@@ -3,15 +3,9 @@ jobs:
   build:
     docker:
       - image: sonarqube:community
-        environment:
-          DATABASE_URL: postgres://postgres@localhost:5432/circle_test?sslmode=disable
 
-      - image: circleci/postgres:10-alpine-ram
 
-    working_directory: /go/src/github.com/transfeera/company-api
 
-    environment:
-      TEST_RESULTS: /tmp/test-results
 
     steps:
       - checkout
