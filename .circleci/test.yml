@@ -1,0 +1,57 @@
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11-jdk-stretch-node-browsers
+        
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Code Analysis"
+          command: |
+            docker run --rm \
+              -e SONAR_HOST_URL=$SONAR_HOST_URL \
+              -e SONAR_LOGIN=$SONAR_LOGIN \
+              -v "$(pwd):/usr/src" \
+              sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
+                -Dsonar.pullrequest.key=$CIRCLE_PULL_REQUEST \
+                -Dsonar.pullrequest.branch=$CIRCLE_BRANCH \
+
+
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+
+
+
+//////////////////////////////////////
+
+
+
+
+  code_analysis:
+    docker:
+      - image: circleci/openjdk:11-jdk-stretch-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: Sonarqube analysis
+          command: ./gradlew sonarqube
+
+workflows:
+ 'Test, Build and Deploy Workflow':
+  jobs:
+    - unit-test
+    - integration-test
+    - code_analysis:
+        requires:
+           - unit-test
+           - integration-test
+        context: sonarqube

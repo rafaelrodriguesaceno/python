@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.13
+      - image: sonarqube:community
         environment:
           DATABASE_URL: postgres://postgres@localhost:5432/circle_test?sslmode=disable
 
@@ -29,18 +29,12 @@ jobs:
                 -Dsonar.pullrequest.key=$CIRCLE_PULL_REQUEST \
                 -Dsonar.pullrequest.branch=$CIRCLE_BRANCH \
 
-
-
 workflows:
   version: 2
   build:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - master
-                - homolog
+      - build
+
 
 
 
