@@ -52,7 +52,6 @@ jobs:
               -v "$(pwd):/usr/src" \
               sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
-<<<<<<< HEAD
                 -Dsonar.pullrequest.key=$CIRCLE_PULL_REQUEST \
                 -Dsonar.pullrequest.branch=$CIRCLE_BRANCH \
 workflows:
@@ -63,6 +62,3 @@ workflows:
           context: PR_BUILD
           requires:
               - build
-=======
-                -Dsonar.qualitygate.wait=true \
->>>>>>> 4f88d9f674867cc4766a58bd477c81a18d019229
